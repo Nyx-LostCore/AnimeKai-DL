@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - REDIS_URL=redis://redis:6379/0
+      - API_KEY=${API_KEY}
+      - USE_S3=${USE_S3}
+
+    volumes:
+      - ./:/app
+
+  redis:
+    image: redis:7-alpine
+
+    ports:
+      - "6379:6379"
+
+  worker:
+    build: .
+
+    command: python worker.py
+
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+
+    depends_on:
+      - redis
