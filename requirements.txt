@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+python-multipart
+sqlmodel
+alembic
+requests
+beautifulsoup4
+boto3
+botocore
+python-dotenv
+aiofiles
+redis
+rq
+pytest
+pydantic[email]
